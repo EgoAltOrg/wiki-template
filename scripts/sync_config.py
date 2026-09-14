@@ -66,6 +66,17 @@ CONTENT_ONLY = {
     "map.md",
 }
 
+# Extra wikilink rewrites for CONTENT_ONLY stub targets. BILINGUAL WIKIS ONLY;
+# leave empty for a monolingual wiki. PAGE_MAP already tells the engine every
+# synced page's source-basename -> slug, and it rewrites `[[gazetteer.en]]` ->
+# `[[gazetteer]]` from that automatically. But a content-only page (the Leaflet
+# map) has no PAGE_MAP entry, so the engine can't know its slug. If your source
+# pages link it by a local .en/.pt convention (`[[map.en]]`) so the link resolves
+# against a vault pointer stub, map those basenames to the published slug here.
+# Keyed by source basename, value is the content/ slug (no .md). Example:
+#   LINK_REWRITE = {"map.en": "map", "map.pt": "pt/map"}
+LINK_REWRITE = {}
+
 # The public-fields contract for the typed infobox: the ONLY frontmatter keys,
 # besides `title:` and the carried-forward marker:/submap:/image: blocks, that
 # may pass from the source through to the published site. Keys pass only for the
