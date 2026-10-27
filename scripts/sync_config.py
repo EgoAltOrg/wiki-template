@@ -16,6 +16,11 @@ Fill in the six things below for your wiki:
 
 Everything here is plain Python data, so keep the comments that explain a
 decision next to it. The shared engine reads these names; do not rename them.
+
+This file sits in scripts/ by default. If its tables or comments would name
+secrets (a held-back page, why a link is withheld), keep it and the two
+allowlist JSONs outside the public repo, and run every script with
+WIKI_CONFIG_DIR set to that folder.
 """
 import os
 from pathlib import Path
@@ -76,6 +81,24 @@ CONTENT_ONLY = {
 # Keyed by source basename, value is the content/ slug (no .md). Example:
 #   LINK_REWRITE = {"map.en": "map", "map.pt": "pt/map"}
 LINK_REWRITE = {}
+
+# Optional knobs, read only when present. Leave them out until your wiki needs
+# one.
+#
+# PORTRAIT_DIR: a folder of portrait images. A brand-new page whose source opens
+# with a portrait embed (`![[name.jpg|320]]`) publishes with `image: name.jpg`,
+# and the file is copied into content/assets/. Without it, images are placed by
+# hand.
+#   PORTRAIT_DIR = ONTOS_SETTING.parent / "raw" / "character-art"
+#
+# EXTRA_TITLE_FORMS: extra surface forms check-related-pages-grounding.py also
+# flags for a secret title, keyed by the lowercased title. Only for a word
+# archaic enough never to turn up in public prose by accident.
+#   EXTRA_TITLE_FORMS = {"the threnodies": ["threnody"]}
+#
+# COMMON_NOUN_SLUGS: pages whose title is an ordinary common noun ("elves"), so
+# check-title-casing.py lets a mid-sentence link to them stay lowercase.
+#   COMMON_NOUN_SLUGS = {"elves"}
 
 # The public-fields contract for the typed infobox: the ONLY frontmatter keys,
 # besides `title:` and the carried-forward marker:/submap:/image: blocks, that
